@@ -11,6 +11,7 @@ class TelegramController extends Controller
 {
     public function handle(Request $request)
     {
+        Log::debug('raw webhook', [$request->all(), $request->getContent()]);
         $updates = Telegram::getWebhookUpdate();
         Log::debug('debug webhook', [$updates]);
     }
