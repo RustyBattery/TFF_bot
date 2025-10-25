@@ -62,6 +62,27 @@ services:
     networks:
       - main
 
+  certbot-init:
+    image: certbot/certbot
+    container_name: certbot-init
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - ..:/var/www
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - nginx
+    command: >
+      certonly --webroot
+      -w /var/www/public
+      -d zm61aran.ru -d www.zm61aran.ru
+      --email adukova.meow@gmail.com
+      --agree-tos
+      --no-eff-email
+      -v
+    networks:
+      - main
+
 volumes:
   postgres:
   certbot-etc:
