@@ -27,6 +27,7 @@ services:
     volumes:
       - ..:/var/www
       - ./nginx:/etc/nginx/conf.d
+      - certbot-etc:/etc/letsencrypt
     depends_on:
       - app
     networks:
