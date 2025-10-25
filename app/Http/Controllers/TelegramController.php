@@ -9,7 +9,7 @@ class TelegramController extends Controller
 {
     public function handle(Request $request)
     {
-        $telegram = new Api(config('telegram.bots.mybot.token'));
+        $telegram = new Api(config('telegram.bots.main.token'));
         $update = $telegram->getWebhookUpdate();
 
         $chatId = $update->getMessage()->getChat()->getId();
