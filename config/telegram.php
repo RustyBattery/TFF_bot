@@ -31,7 +31,7 @@ return [
     |             ]
     */
     'bots' => [
-        'main' => [
+        'mybot' => [
             'token' => env('TELEGRAM_BOT_TOKEN', 'YOUR-BOT-TOKEN'),
             'certificate_path' => env('TELEGRAM_CERTIFICATE_PATH', 'YOUR-CERTIFICATE-PATH'),
             'webhook_url' => env('APP_URL', 'http://localhost').'/webhook/telegram',
