@@ -23,12 +23,10 @@ class TelegramController extends Controller
             $data = $callback->getData();
             $chatId = $callback->getMessage()->getChat()->getId();
 
-//            $this->telegram->sendMessage(['chat_id' => $chatId, 'text' => $data]);
+            $this->telegram->sendMessage(['chat_id' => $chatId, 'text' => $data]);
 
             $this->telegram->answerCallbackQuery([
                 'callback_query_id' => $callback->getId(),
-                'text' => 'Ответ на '. $data,
-                'show_alert' => false,
             ]);
         }
 
