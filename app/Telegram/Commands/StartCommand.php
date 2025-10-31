@@ -8,7 +8,7 @@ use Telegram\Bot\Keyboard\Keyboard;
 class StartCommand extends Command
 {
     protected string $name = 'start';
-    protected string $description = 'Начало работы с ботом';
+    protected string $description = 'Главное меню';
 
     public function handle()
     {
