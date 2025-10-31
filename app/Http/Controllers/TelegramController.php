@@ -45,8 +45,6 @@ class TelegramController extends Controller
                     break;
             }
 
-            $this->telegram->sendMessage(['chat_id' => $chatId, 'text' => $data]);
-
             $this->telegram->answerCallbackQuery([
                 'callback_query_id' => $callback->getId(),
             ]);
