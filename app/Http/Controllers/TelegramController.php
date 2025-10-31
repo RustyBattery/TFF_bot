@@ -16,6 +16,7 @@ class TelegramController extends Controller
     }
     public function handle(Request $request)
     {
+        $update = $this->telegram->commandsHandler(true);
         $update = $this->telegram->getWebhookUpdate();
 
         $response = $this->telegram->sendMessage([
