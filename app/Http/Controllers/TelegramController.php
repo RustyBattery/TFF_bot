@@ -17,16 +17,15 @@ class TelegramController extends Controller
     public function handle(Request $request)
     {
         $update = $this->telegram->commandsHandler(true);
-        $update = $this->telegram->getWebhookUpdate();
 
-        $response = $this->telegram->sendMessage([
-            'chat_id' => $update->getChat()->id ?? '',
-            'text' => $update->getMessage()->text ?? '',
-        ]);
+//        $response = $this->telegram->sendMessage([
+//            'chat_id' => $update->getChat()->id ?? '',
+//            'text' => $update->getMessage()->text ?? '',
+//        ]);
 
         Log::info('webhook info', [
             'update' => $update,
-            'response' => $response,
+//            'response' => $response,
         ]);
 
     }
