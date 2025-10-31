@@ -9,10 +9,46 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 
 class TelegramController extends Controller
 {
+    protected Api $telegram;
+    public function __construct(Api $telegram)
+    {
+        $this->telegram = $telegram;
+    }
     public function handle(Request $request)
     {
-        Log::debug('raw webhook', [$request->all(), $request->getContent()]);
-        $updates = Telegram::getWebhookUpdate();
-        Log::debug('debug webhook', [$updates]);
+        $update = $this->telegram->getWebhookUpdate();
+
+        Log::info('webhook info', [
+            'update' => $update,
+            'chat' => $update->getChat() ?? '',
+            'msg' => $update->getMessage() ?? '',
+        ]);
+
     }
 }
+
+//{
+//  "update_id":213496714,
+//  "message":{
+//      "message_id":22,
+//      "from":{
+//          "id":1236822007,
+//          "is_bot":false,
+//          "first_name":"Rita",
+//          "last_name":"Adukova",
+//          "username":"rusty_battery",
+//          "language_code":"ru"},
+//          "chat":{
+//              "id":1236822007,
+//              "first_name":"Rita",
+//              "last_name":"Adukova",
+//              "username":"rusty_battery",
+//              "type":"private"
+//          },
+//          "date":1761912796,
+//          "text":"/command1",
+//          "entities":[
+//              {"offset":0,"length":9,"type":"bot_command"}
+//          ]
+//      }
+//  }
