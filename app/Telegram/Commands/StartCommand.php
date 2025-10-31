@@ -15,16 +15,17 @@ class StartCommand extends Command
         $reply_markup = Keyboard::make()
             ->inline()
             ->row([
-                Keyboard::inlineButton(['text' => 'Кнопка 1', 'callback_data' => 'k1']),
-                Keyboard::inlineButton(['text' => 'Кнопка 2', 'callback_data' => 'k2'])
+                Keyboard::inlineButton(['text' => 'Внести информацию о ребенке', 'callback_data' => 'registration'])
             ])
             ->row([
-                Keyboard::inlineButton(['text' => 'Кнопка 3', 'callback_data' => 'k3'])
+                Keyboard::inlineButton(['text' => 'Просмотр расписания', 'callback_data' => 'schedule'])
+            ])
+            ->row([
+                Keyboard::inlineButton(['text' => 'Написать в поддержку', 'callback_data' => 'support'])
             ]);
 
-
         $this->replyWithMessage([
-            'text' => 'Добро пожаловать в онлайн запись!',
+            'text' => 'Выберете действие:',
             'reply_markup' => $reply_markup
         ]);
     }
