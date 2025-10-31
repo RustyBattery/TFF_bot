@@ -18,9 +18,9 @@ class StartCommand extends Command
                 Keyboard::inlineButton(['text' => 'Кнопка 1', 'callback_data' => 'k1']),
                 Keyboard::inlineButton(['text' => 'Кнопка 2', 'callback_data' => 'k2'])
             ])
-            ->row(
+            ->row([
                 Keyboard::inlineButton(['text' => 'Кнопка 3', 'callback_data' => 'k3'])
-            );
+            ]);
 
 
         $this->replyWithMessage([
