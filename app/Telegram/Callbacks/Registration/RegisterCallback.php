@@ -11,7 +11,7 @@ class RegisterCallback extends Callback
     public function handle()
     {
         $this->replyWithMessage([
-            'text' => 'Registration callback'
+            'text' => 'Позже здесь будет доступно добавление фио ребенка, возраста, района, после чего в ответ будет отправлена ссылка на родительский чат'
         ]);
     }
 }
