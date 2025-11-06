@@ -3,6 +3,7 @@
 namespace App\Telegram;
 
 use App\Telegram\Callbacks\Callback;
+use Illuminate\Support\Facades\Log;
 
 class CallbackManager
 {
@@ -17,6 +18,7 @@ class CallbackManager
 
     public function resolve(string $name): ?Callback
     {
+        Log::debug('CallbackManager resolve', ['result' => $this->callbacks[$name] ?? null, 'callbacks' => $this->callbacks]);
         return $this->callbacks[$name] ?? null;
     }
 }
