@@ -19,12 +19,12 @@ class ChildBirthdateApproveCallback extends Callback
         $reply_markup = Keyboard::make()->inline();
 
         foreach (Area::all() as $area) {
-            $reply_markup->row(
+            $reply_markup->row([
                 Keyboard::inlineButton([
                     'text' => $area->name . ' (' . $area->address . ')',
                     'callback_data' => 'select_area_' . $area->id,
                 ])
-            );
+            ]);
         }
 
 
