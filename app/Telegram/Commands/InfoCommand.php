@@ -45,10 +45,10 @@ class InfoCommand extends Command
             ]);
 
         $firstString = "<b>Информация о ребенке:</b>\n\n";
-        $nameString = "<b>ФИО:</b> ". ($child->name ?? '-') . "\n";
-        $birthdateString = "<b>Дата рождения:</b> ". ($child->birthdate ?? '-') . "\n";
-        $area = $child->area ;
-        $areaString = "<b>Район:</b> ". ($area ? $area->name : '-') . " (". ($area ? $area->address : '') . ")";
+        $nameString = "<b>ФИО:</b> " . ($child->name ?? '-') . "\n";
+        $birthdateString = "<b>Дата рождения:</b> " . ($child->birthdate ? Carbon::parse($child->birthdate)->format('d.m.Y') : '-') . "\n";
+        $area = $child->area;
+        $areaString = "<b>Район:</b> " . ($area ? $area->name : '-') . " (" . ($area ? $area->address : '') . ")";
 
         $this->replyWithMessage([
             'text' => $firstString . $nameString . $birthdateString . $areaString,
