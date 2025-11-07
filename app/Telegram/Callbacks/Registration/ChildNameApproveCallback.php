@@ -12,10 +12,10 @@ class ChildNameApproveCallback extends Callback
     public function handle()
     {
         $user = $this->userService->findUserByChatId($this->chatId);
-        $this->userService->setState($user, 'waiting_birthdate');
+        $this->userService->setState($user, 'waiting_child_birthdate');
 
         $this->replyWithMessage([
-            'text' => "Введите дату рождения ребенка в формате *дд.мм.гггг*",
+            'text' => "Введите дату рождения ребенка в формате *дд\\.мм\\.гггг*",
             'parse_mode' => 'MarkdownV2',
         ]);
     }
