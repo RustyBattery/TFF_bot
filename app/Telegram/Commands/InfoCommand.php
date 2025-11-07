@@ -44,11 +44,11 @@ class InfoCommand extends Command
                 Keyboard::inlineButton(['text' => 'Изменить информацию о ребенке', 'callback_data' => 'registration'])
             ]);
 
-        $firstString = "<b>Информация о ребенке:</b>\n";
-        $nameString = "ФИО: ". ($child->name ?? '-') . "\n";
-        $birthdateString = "Дата рождения: ". ($child->birthdate ?? '-') . "\n";
+        $firstString = "<b>Информация о ребенке:</b>\n\n";
+        $nameString = "<b>ФИО:</b> ". ($child->name ?? '-') . "\n";
+        $birthdateString = "<b>Дата рождения:</b> ". ($child->birthdate ?? '-') . "\n";
         $area = $child->area ;
-        $areaString = "Район: ". ($area ? $area->name : '-') . " (". ($area ? $area->address : '') . ")";
+        $areaString = "<b>Район:</b> ". ($area ? $area->name : '-') . " (". ($area ? $area->address : '') . ")";
 
         $this->replyWithMessage([
             'text' => $firstString . $nameString . $birthdateString . $areaString,
