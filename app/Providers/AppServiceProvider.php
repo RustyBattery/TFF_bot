@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(CallbackManager::class);
+        $this->app->singleton(StateManager::class);
     }
 
     /**
