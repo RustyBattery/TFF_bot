@@ -18,7 +18,6 @@ class CallbackManager
 
     public function resolve(string $name): ?Callback
     {
-        Log::debug('CallbackManager resolve', ['result' => $this->callbacks[$name] ?? null, 'callbacks' => $this->callbacks]);
         return $this->callbacks[$name] ?? null;
     }
 }
