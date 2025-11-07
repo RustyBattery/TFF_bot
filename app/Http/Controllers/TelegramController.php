@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Telegram\CallbackManager;
 use App\Telegram\Services\UserService;
+use App\Telegram\StateManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Api;
@@ -19,10 +20,10 @@ class TelegramController extends Controller
         $this->userService = $userService;
     }
 
-    public function handle(CallbackManager $callbacks)
+    public function handle(CallbackManager $callbacks, StateManager $states)
     {
         $update = $this->telegram->commandsHandler(true);
-        $this->userService->createOrUpdateUser($update);
+        $user = $this->userService->createOrUpdateUser($update);
 
         if ($callback = $update->getCallbackQuery()) {
             if ($handler = $callbacks->resolve($callback->getData())) {
@@ -38,9 +39,16 @@ class TelegramController extends Controller
             }
         }
 
+        if ($handler = $states->resolve($user->state->state)) {
+            $handler->setContext($update)->handle();
+            Log::info('state info', [
+                'update' => $update,
+            ]);
+            return;
+        }
+
         Log::info('webhook info', [
             'update' => $update,
         ]);
-
     }
 }

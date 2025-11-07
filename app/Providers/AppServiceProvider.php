@@ -10,6 +10,8 @@ use App\Telegram\Commands\InfoCommand;
 use App\Telegram\Commands\ScheduleCommand;
 use App\Telegram\Commands\StartCommand;
 use App\Telegram\Commands\SupportCommand;
+use App\Telegram\StateManager;
+use App\Telegram\States\Registration\WaitingChildNameState;
 use Illuminate\Support\ServiceProvider;
 use Telegram\Bot\Laravel\Facades\Telegram;
 
@@ -37,5 +39,8 @@ class AppServiceProvider extends ServiceProvider
         $callbackManager->register(RegisterCallback::class);
         $callbackManager->register(ScheduleCallback::class);
         $callbackManager->register(SupportCallback::class);
+
+        $stateManager = app(StateManager::class);
+        $stateManager->register(WaitingChildNameState::class);
     }
 }
