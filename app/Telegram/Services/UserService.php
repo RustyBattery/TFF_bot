@@ -8,22 +8,20 @@ use Telegram\Bot\Objects\Update;
 
 class UserService
 {
-    public function findOrCreateUser($chatId): User
+    public function findUserByChatId($chatId): User
     {
-        $user = User::query()->where('chat_id', $chatId)->first();
-        if (!$user) {
-            $user = User::query()->create([
-                'username' => '', // как-то достать надо
-                'chat_id' => $chatId
-            ]);
-        }
+        $user = User::where('chat_id', $chatId)->first();
         return $user;
     }
 
-    public function createOrUpdateUser(Update $update)
+    public function createOrUpdateUser(Update $update): User
     {
         $chatId = $update->getMessage()->getChat()->getId();
         $username = $update->getMessage()->getChat()->getUsername();
-        Log::debug('createOrUpdateUser', ['chatId' => $chatId, 'username' => $username]);
+        $user = User::updateOrCreate(
+            ['chat_id' => $chatId],
+            ['username' => $username]
+        );
+        return $user;
     }
 }
