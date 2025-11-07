@@ -24,6 +24,7 @@ class WaitingChildBirthdateState extends State
         if ($validator->fails()) {
             $this->replyWithMessage([
                 'text' => "Неверный формат даты. Пожалуйста, введите в формате *дд\\.мм\\.гггг*",
+                'parse_mode' => 'MarkdownV2',
             ]);
             return;
         }
