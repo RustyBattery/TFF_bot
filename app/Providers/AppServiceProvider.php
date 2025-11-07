@@ -13,6 +13,7 @@ use App\Telegram\Commands\ScheduleCommand;
 use App\Telegram\Commands\StartCommand;
 use App\Telegram\Commands\SupportCommand;
 use App\Telegram\StateManager;
+use App\Telegram\States\Registration\WaitingChildBirthdateState;
 use App\Telegram\States\Registration\WaitingChildNameState;
 use Illuminate\Support\ServiceProvider;
 use Telegram\Bot\Laravel\Facades\Telegram;
@@ -47,5 +48,6 @@ class AppServiceProvider extends ServiceProvider
 
         $stateManager = app(StateManager::class);
         $stateManager->register(WaitingChildNameState::class);
+        $stateManager->register(WaitingChildBirthdateState::class);
     }
 }
