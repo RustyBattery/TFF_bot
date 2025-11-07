@@ -15,7 +15,7 @@ class ChildAreaApproveCallback extends Callback
         $this->userService->setState($user, 'default');
 
         $this->replyWithMessage([
-            'text' => "Данные успешно добавлены!\n\nПожалуйста, присоединитесь к родительскому чату по ссылке:\n<*ссылка на родительский чат*>",
+            'text' => "Данные успешно добавлены\\!\n\nПожалуйста, присоединитесь к родительскому чату по ссылке:\n<*ссылка на родительский чат*>",
             'parse_mode' => 'MarkdownV2',
         ]);
     }
