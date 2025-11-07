@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Telegram\CallbackManager;
+use App\Telegram\Callbacks\Registration\ChildNameApproveCallback;
+use App\Telegram\Callbacks\Registration\ChildNameResetCallback;
 use App\Telegram\Callbacks\Registration\RegisterCallback;
 use App\Telegram\Callbacks\Schedule\ScheduleCallback;
 use App\Telegram\Callbacks\Support\SupportCallback;
@@ -40,6 +42,8 @@ class AppServiceProvider extends ServiceProvider
         $callbackManager->register(RegisterCallback::class);
         $callbackManager->register(ScheduleCallback::class);
         $callbackManager->register(SupportCallback::class);
+        $callbackManager->register(ChildNameApproveCallback::class);
+        $callbackManager->register(ChildNameResetCallback::class);
 
         $stateManager = app(StateManager::class);
         $stateManager->register(WaitingChildNameState::class);
