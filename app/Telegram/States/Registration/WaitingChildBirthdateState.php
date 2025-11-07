@@ -32,12 +32,12 @@ class WaitingChildBirthdateState extends State
         $user = $this->userService->findUserByChatId($this->chatId);
         $this->userService->setState($user, 'approval_child_birthdate');
 
-        $birthdate = Carbon::createFromFormat('d.m.Y', $birthdate);
+        $birthdateCarbon = Carbon::createFromFormat('d.m.Y', $birthdate);
         if ($child = $user->children()->first()) {
-            $child->birthdate = $birthdate;
+            $child->birthdate = $birthdateCarbon;
             $child->save();
         } else {
-            $user->children()->create(['birthdate' => $birthdate]);
+            $user->children()->create(['birthdate' => $birthdateCarbon]);
         }
 
         $reply_markup = Keyboard::make()
