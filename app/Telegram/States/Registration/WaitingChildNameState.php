@@ -33,6 +33,7 @@ class WaitingChildNameState extends State
 
         $this->replyWithMessage([
             'text' => "ФИО ребенка: *$childName*\n\nПодтвердить?",
+            'parse_mode' => 'MarkdownV2',
             'reply_markup' => $reply_markup
         ]);
     }
