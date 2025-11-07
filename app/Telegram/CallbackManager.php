@@ -18,6 +18,11 @@ class CallbackManager
 
     public function resolve(string $name): ?Callback
     {
-        return $this->callbacks[$name] ?? null;
+        foreach ($this->callbacks as $callback) {
+            if ($callback->match($name)) {
+                return $callback;
+            }
+        }
+        return null;
     }
 }

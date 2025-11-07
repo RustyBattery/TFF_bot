@@ -8,6 +8,7 @@ use App\Telegram\Callbacks\Registration\ChildBirthdateResetCallback;
 use App\Telegram\Callbacks\Registration\ChildNameApproveCallback;
 use App\Telegram\Callbacks\Registration\ChildNameResetCallback;
 use App\Telegram\Callbacks\Registration\RegisterCallback;
+use App\Telegram\Callbacks\Registration\SelectAreaCallback;
 use App\Telegram\Callbacks\Schedule\ScheduleCallback;
 use App\Telegram\Callbacks\Support\SupportCallback;
 use App\Telegram\Commands\InfoCommand;
@@ -49,6 +50,7 @@ class AppServiceProvider extends ServiceProvider
         $callbackManager->register(ChildNameResetCallback::class);
         $callbackManager->register(ChildBirthdateApproveCallback::class);
         $callbackManager->register(ChildBirthdateResetCallback::class);
+        $callbackManager->register(SelectAreaCallback::class);
 
         $stateManager = app(StateManager::class);
         $stateManager->register(WaitingChildNameState::class);

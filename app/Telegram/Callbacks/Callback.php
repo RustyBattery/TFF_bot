@@ -10,6 +10,7 @@ abstract class Callback
     protected Api $telegram;
     protected UserService $userService;
     protected $name = '';
+    protected $pattern = '';
     protected $update;
     protected $callback;
     protected $chatId = '';
@@ -38,5 +39,18 @@ abstract class Callback
     public function replyWithMessage($params)
     {
         $this->telegram->sendMessage(array_merge(['chat_id' => $this->chatId], $params));
+    }
+
+    public function match(string $data): bool
+    {
+        if ($this->name && $this->name === $data) {
+            return true;
+        }
+
+        if ($this->pattern && preg_match("/^{$this->pattern}$/", $data)) {
+            return true;
+        }
+
+        return false;
     }
 }
