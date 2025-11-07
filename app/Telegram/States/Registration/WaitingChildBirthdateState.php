@@ -48,8 +48,8 @@ class WaitingChildBirthdateState extends State
             ]);
 
         $this->replyWithMessage([
-            'text' => "Дата рождения: *$birthdate*\n\nПодтвердить?",
-            'parse_mode' => 'MarkdownV2',
+            'text' => "Дата рождения: <b>$birthdate</b>\n\nПодтвердить?",
+            'parse_mode' => 'HTML',
             'reply_markup' => $reply_markup
         ]);
     }
