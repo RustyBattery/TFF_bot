@@ -20,6 +20,10 @@ class SelectAreaCallback extends Callback
         $areaId = (int)$match[1];
         $area = Area::find($areaId);
 
+        $child = $user->children()->first();
+        $child->area_id = $areaId;
+        $child->save();
+
         $reply_markup = Keyboard::make()
             ->inline()
             ->row([
