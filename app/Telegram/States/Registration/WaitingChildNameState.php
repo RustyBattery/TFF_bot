@@ -32,7 +32,7 @@ class WaitingChildNameState extends State
             ]);
 
         $this->replyWithMessage([
-            'text' => "ФИО ребенка: $childName\nПодтвердить?",
+            'text' => "ФИО ребенка: *$childName*\n\nПодтвердить?",
             'reply_markup' => $reply_markup
         ]);
     }
