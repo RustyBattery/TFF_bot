@@ -22,8 +22,10 @@ class TelegramController extends Controller
 
     public function handle(CallbackManager $callbacks, StateManager $states)
     {
-        $update = $this->telegram->commandsHandler(true);
+        $update = $this->telegram->getWebhookUpdate();
         $user = $this->userService->createOrUpdateUser($update);
+
+        $update = $this->telegram->commandsHandler(true);
 
         if ($callback = $update->getCallbackQuery()) {
             if ($handler = $callbacks->resolve($callback->getData())) {
