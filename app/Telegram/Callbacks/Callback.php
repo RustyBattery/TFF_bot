@@ -2,19 +2,22 @@
 
 namespace App\Telegram\Callbacks;
 
+use App\Telegram\Services\UserService;
 use Telegram\Bot\Api;
 
 abstract class Callback
 {
     protected Api $telegram;
+    protected UserService $userService;
     protected $name = '';
     protected $update;
     protected $callback;
     protected $chatId = '';
 
-    public function __construct(Api $telegram)
+    public function __construct(Api $telegram, UserService $userService)
     {
         $this->telegram = $telegram;
+        $this->userService = $userService;
     }
 
     public function setContext($update, $callback)

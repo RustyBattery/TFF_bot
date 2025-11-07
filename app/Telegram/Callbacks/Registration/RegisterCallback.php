@@ -2,6 +2,7 @@
 
 namespace App\Telegram\Callbacks\Registration;
 
+use App\Models\Telegram\UserState;
 use App\Telegram\Callbacks\Callback;
 
 class RegisterCallback extends Callback
@@ -10,8 +11,11 @@ class RegisterCallback extends Callback
 
     public function handle()
     {
+        $user = $this->userService->findUserByChatId($this->chatId);
+        $this->userService->setState($user, 'waiting_child_name');
+
         $this->replyWithMessage([
-            'text' => 'Позже здесь будет доступно добавление фио ребенка, возраста, района, после чего в ответ будет отправлена ссылка на родительский чат'
+            'text' => 'Введите ФИО ребенка'
         ]);
     }
 }

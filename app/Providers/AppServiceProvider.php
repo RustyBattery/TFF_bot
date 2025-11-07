@@ -6,7 +6,12 @@ use App\Telegram\CallbackManager;
 use App\Telegram\Callbacks\Registration\RegisterCallback;
 use App\Telegram\Callbacks\Schedule\ScheduleCallback;
 use App\Telegram\Callbacks\Support\SupportCallback;
+use App\Telegram\Commands\InfoCommand;
+use App\Telegram\Commands\ScheduleCommand;
+use App\Telegram\Commands\StartCommand;
+use App\Telegram\Commands\SupportCommand;
 use Illuminate\Support\ServiceProvider;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +28,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Telegram::addCommand(StartCommand::class);
+        Telegram::addCommand(InfoCommand::class);
+        Telegram::addCommand(ScheduleCommand::class);
+        Telegram::addCommand(SupportCommand::class);
+
         $callbackManager = app(CallbackManager::class);
         $callbackManager->register(RegisterCallback::class);
         $callbackManager->register(ScheduleCallback::class);

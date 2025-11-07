@@ -38,10 +38,10 @@ return [
 
             'allowed_updates' => null,
             'commands' => [
-                \App\Telegram\Commands\StartCommand::class,
-                \App\Telegram\Commands\InfoCommand::class,
-                \App\Telegram\Commands\ScheduleCommand::class,
-                \App\Telegram\Commands\SupportCommand::class,
+//                \App\Telegram\Commands\StartCommand::class,
+//                \App\Telegram\Commands\InfoCommand::class,
+//                \App\Telegram\Commands\ScheduleCommand::class,
+//                \App\Telegram\Commands\SupportCommand::class,
             ],
         ],
     ],
