@@ -2,7 +2,9 @@
 
 namespace App\Telegram\States\Registration;
 
+use App\Models\Child;
 use App\Telegram\States\State;
+use Telegram\Bot\Keyboard\Keyboard;
 
 class WaitingChildNameState extends State
 {
@@ -11,10 +13,27 @@ class WaitingChildNameState extends State
     public function handle()
     {
         $user = $this->userService->findUserByChatId($this->chatId);
-        $this->userService->resetState($user);
+        $this->userService->setState($user, 'approval_child_name');
+
+        $childName = $this->update->getMessage()->text;
+
+        if ($child = $user->children()->first()) {
+            $child->name = $childName;
+            $child->save();
+        } else {
+            $user->children()->create(['name' => $childName]);
+        }
+
+        $reply_markup = Keyboard::make()
+            ->inline()
+            ->row([
+                Keyboard::inlineButton(['text' => 'Да', 'callback_data' => 'child_name_approve']),
+                Keyboard::inlineButton(['text' => 'Нет', 'callback_data' => 'child_name_reset'])
+            ]);
 
         $this->replyWithMessage([
-            'text' => 'ФИО:' . $this->update->getMessage()->text,
+            'text' => 'ФИО ребенка: ' . $childName . '\nПодтвердить?',
+            'reply_markup' => $reply_markup
         ]);
     }
 }
