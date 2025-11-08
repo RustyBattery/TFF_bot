@@ -34,7 +34,7 @@ class ScheduleCommand extends Command
                     ->where('day', $day)
                     ->orderBy('start_time')->get();
                 if (count($lessons) > 0) {
-                    $text .= "<b>". Lesson::getDayName($day) . "</b>>\n";
+                    $text .= "<b>". Lesson::getDayName($day) . "</b>\n";
                 }
                 foreach ($lessons as $lesson) {
                     $text .= $lesson->getTimeRangeAttribute() . "\n";
