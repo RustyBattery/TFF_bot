@@ -2,6 +2,7 @@
 
 namespace App\Telegram\Callbacks\Registration;
 
+use App\Events\ChildRegistered;
 use App\Models\Telegram\UserState;
 use App\Telegram\Callbacks\Callback;
 
@@ -14,7 +15,7 @@ class ChildAreaApproveCallback extends Callback
         $user = $this->userService->findUserByChatId($this->chatId);
         $this->userService->setState($user, 'default');
 
-        // оповещение админов
+        ChildRegistered::dispatch($user->children()->first());
 
         $this->replyWithMessage([
             'text' => "Данные успешно добавлены\\!\n\nПожалуйста, присоединитесь к родительскому чату по ссылке:\n\\<*ссылка на родительский чат*\\>",
