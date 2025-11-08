@@ -23,7 +23,7 @@ class Lesson extends Model
         return $this->belongsTo(Area::class, 'area_id', 'id');
     }
 
-    public function getDayName()
+    public static function getDayName(string $day)
     {
         return [
             'Mo' => 'Понедельник',
@@ -33,7 +33,7 @@ class Lesson extends Model
             'Fr' => 'Пятница',
             'Sa' => 'Суббота',
             'Su' => 'Воскресенье',
-        ][$this->day];
+        ][$day] ?? $day;
     }
 
     public function getTimeRangeAttribute()

@@ -29,19 +29,16 @@ class ScheduleCommand extends Command
         $text = '';
         foreach ($areas as $area) {
             $text .= "<b>" . $area->name . "</b>\n" . $area->address . "\n\n";
-//            foreach (Lesson::DAY_ORDER as $day) {
-//                if (!isset($scheduleByDay[$day])) {
-//                    continue;
-//                }
-//
-//                $text .= "<b>" . (new Lesson)->getDayNameAttribute($day) . "</b>\n";
-//
-//                foreach ($scheduleByDay[$day] as $lesson) {
-//                    $text .= $lesson->time_range . "\n";
-//                }
-//
-//                $text .= "\n";
-//            }
+            foreach (Lesson::DAY_ORDER as $day) {
+                $lessons = $area->lessons()
+                    ->where('day', $day)
+                    ->orderBy('start_time')->get();
+                $text .= Lesson::getDayName($day) . "\n";
+                foreach ($lessons as $lesson) {
+                    $text .= $lesson->time_range . "\n";
+                }
+            }
+            $text .= "\n\n\n";
         }
 
         $this->replyWithMessage([
