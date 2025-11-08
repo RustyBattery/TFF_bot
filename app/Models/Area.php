@@ -16,4 +16,9 @@ class Area extends Model
     {
         return $this->hasMany(Child::class, 'area_id', 'id');
     }
+
+    public function lessons(): HasMany
+    {
+        return $this->hasMany(Lesson::class, 'area_id', 'id');
+    }
 }
