@@ -2,6 +2,8 @@
 
 namespace App\Telegram\Commands;
 
+use App\Models\Area;
+use App\Models\Lesson;
 use App\Telegram\Services\UserService;
 use Telegram\Bot\Commands\Command;
 use Telegram\Bot\Keyboard\Keyboard;
@@ -22,8 +24,31 @@ class ScheduleCommand extends Command
         $user = $this->userService->findUserByUpdate($this->getUpdate());
         $this->userService->resetState($user);
 
+        $areas = Area::with(['lessons' => function ($q) {
+            $q->ordered();
+        }])->get();
+
+        foreach ($areas as $area) {
+            $scheduleByDay = $area->lessons->groupBy('day');
+            $text = "<b>" . $area->name . "</b>\n" . $area->address . "\n\n";
+            foreach (Lesson::DAY_ORDER as $day) {
+                if (!isset($scheduleByDay[$day])) {
+                    continue;
+                }
+
+                $text .= "<b>" . (new Lesson)->getDayNameAttribute($day) . "</b>\n";
+
+                foreach ($scheduleByDay[$day] as $lesson) {
+                    $text .= $lesson->time_range . "\n";
+                }
+
+                $text .= "\n";
+            }
+        }
+
         $this->replyWithMessage([
-            'text' => 'Позже здесь можно будет просмотреть расписание занятий по районам',
+            'text' => $text,
+            'parse_mode' => 'HTML'
         ]);
     }
 }
