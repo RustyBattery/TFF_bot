@@ -26,7 +26,7 @@ class SendNewChildNotification
         $text .= "ФИО: " . $child->name . "\n";
         $age = Carbon::parse($child->birthdate)->age;
         $text .= "Возраст: " . $age . "\n";
-        $text .= "Район: " . $child->area->name . "\n";
+        $text .= "Район: " . $child->area->name . " (" . $child->area->address . ")" . "\n";
         $text .= "Контакт родителя: @" . $user->username . "\n";
 
         $this->telegram->sendMessage([
