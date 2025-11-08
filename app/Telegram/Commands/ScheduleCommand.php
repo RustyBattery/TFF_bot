@@ -28,13 +28,13 @@ class ScheduleCommand extends Command
 
         $text = '';
         foreach ($areas as $area) {
-            $text .= "<b>" . $area->name . "</b>\n" . $area->address . "\n";
+            $text .= "<b>" . $area->name . "</b>\n<i>" . $area->address . "</i>\n";
             foreach (Lesson::DAY_ORDER as $day) {
                 $lessons = $area->lessons()
                     ->where('day', $day)
                     ->orderBy('start_time')->get();
                 if (count($lessons) > 0) {
-                    $text .= Lesson::getDayName($day) . "\n";
+                    $text .= "<b>". Lesson::getDayName($day) . "</b>>\n";
                 }
                 foreach ($lessons as $lesson) {
                     $text .= $lesson->getTimeRangeAttribute() . "\n";
