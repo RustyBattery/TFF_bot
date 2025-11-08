@@ -41,14 +41,15 @@ class TelegramController extends Controller
             }
         }
 
-        if ($handler = $states->resolve($user->state->state)) {
-            $handler->setContext($update)->handle();
-            Log::info('state info', [
-                'update' => $update,
-            ]);
-            return;
+        if ($update->getMessage() && !str_starts_with($update->getMessage()->text, '/')) {
+            if ($handler = $states->resolve($user->state->state)) {
+                $handler->setContext($update)->handle();
+                Log::info('state info', [
+                    'update' => $update,
+                ]);
+                return;
+            }
         }
-
         Log::info('webhook info', [
             'update' => $update,
         ]);
