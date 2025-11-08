@@ -35,7 +35,7 @@ class ScheduleCommand extends Command
                     ->orderBy('start_time')->get();
                 $text .= Lesson::getDayName($day) . "\n";
                 foreach ($lessons as $lesson) {
-                    $text .= $lesson->time_range . "\n";
+                    $text .= $lesson->getTimeRangeAttribute() . "\n";
                 }
             }
             $text .= "\n\n\n";
