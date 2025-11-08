@@ -8,12 +8,12 @@ use Telegram\Bot\Keyboard\Keyboard;
 
 class WaitingSupportRequestState extends State
 {
-    protected $name = 'waiting_child_name';
+    protected $name = 'waiting_support_request';
 
     public function handle()
     {
         $user = $this->userService->findUserByChatId($this->chatId);
-        $this->userService->setState($user, 'waiting_support_request');
+        $this->userService->resetState($user);
 
         $requestText = $this->update->getMessage()->text;
         $user->supportRequests()->create(['request' => $requestText]);
