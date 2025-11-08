@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Telegram\SupportRequests;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -17,10 +18,9 @@ class SupportRequestCreated
     /**
      * Create a new event instance.
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(
+        public SupportRequests $supportRequest,
+    ) {}
 
     /**
      * Get the channels the event should broadcast on.
