@@ -25,12 +25,14 @@ class ScheduleCommand extends Command
         $this->userService->resetState($user);
 
         $areas = Area::with(['lessons' => function ($q) {
-            $q->ordered();
+            $q->orderByRaw("array_position(ARRAY['Mo','Tu','We','Th','Fr','Sa','Su'], day)")
+                ->orderBy('start_time');
         }])->get();
 
+        $text = '';
         foreach ($areas as $area) {
             $scheduleByDay = $area->lessons->groupBy('day');
-            $text = "<b>" . $area->name . "</b>\n" . $area->address . "\n\n";
+            $text .= "<b>" . $area->name . "</b>\n" . $area->address . "\n\n";
             foreach (Lesson::DAY_ORDER as $day) {
                 if (!isset($scheduleByDay[$day])) {
                     continue;
