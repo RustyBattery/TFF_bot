@@ -5,6 +5,7 @@ namespace App\Models\Telegram;
 use App\Models\Child;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Model
@@ -22,5 +23,10 @@ class User extends Model
     public function children(): BelongsToMany
     {
         return $this->belongsToMany(Child::class, 'tg_user_children', 'user_id', 'child_id');
+    }
+
+    public function supportRequests(): HasMany
+    {
+        return $this->hasMany(SupportRequests::class, 'user_id', 'id');
     }
 }
