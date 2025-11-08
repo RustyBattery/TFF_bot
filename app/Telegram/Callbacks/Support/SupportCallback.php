@@ -12,10 +12,10 @@ class SupportCallback extends Callback
     public function handle()
     {
         $user = $this->userService->findUserByChatId($this->chatId);
-        $this->userService->resetState($user);
+        $this->userService->setState($user, 'waiting_support_request');
 
         $this->replyWithMessage([
-            'text' => 'Позже здесь будет доступно обращение в поддержку'
+            'text' => 'Введите текст обращения в поддержку:',
         ]);
     }
 }

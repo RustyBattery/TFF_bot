@@ -20,10 +20,10 @@ class SupportCommand extends Command
     public function handle()
     {
         $user = $this->userService->findUserByUpdate($this->getUpdate());
-        $this->userService->resetState($user);
+        $this->userService->setState($user, 'waiting_support_request');
 
         $this->replyWithMessage([
-            'text' => 'Позже здесь можно будет оставить обращение в поддержку',
+            'text' => 'Введите текст обращения в поддержку:',
         ]);
     }
 }
