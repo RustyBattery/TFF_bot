@@ -34,14 +34,19 @@ class ScheduleCommand extends Command
                     ->where('day', $day)
                     ->orderBy('start_time')->get();
                 if (count($lessons) > 0) {
-                    $text .= "<b>". Lesson::getDayName($day) . "</b>\n";
+                    $text .= "<b>" . Lesson::getDayName($day) . "</b>\n";
                 }
                 foreach ($lessons as $lesson) {
                     $text .= $lesson->getTimeRangeAttribute() . " " . $lesson->comment . "\n";
                 }
             }
-            $text .= "\n\n";
+            $text .= "\n\n\n";
         }
+
+        $text .= "<b>НОВИЧКИ ходят 3 раза в неделю!\n" .
+            "Далее прибавляем!\n" .
+            "Пробное в любой день! По расписанию!\n\n" .
+            "С собой: сменные кроссовки для зала, белые носки, спортивная форма, бутылочка с водой</b>";
 
         $this->replyWithMessage([
             'text' => $text,
