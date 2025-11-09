@@ -29,7 +29,7 @@ class ScheduleCallback extends Callback
                     $text .= "<b>". Lesson::getDayName($day) . "</b>\n";
                 }
                 foreach ($lessons as $lesson) {
-                    $text .= $lesson->getTimeRangeAttribute() . "\n";
+                    $text .= $lesson->getTimeRangeAttribute() . " " . $lesson->comment . "\n";
                 }
             }
             $text .= "\n\n";

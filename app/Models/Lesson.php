@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Lesson extends Model
 {
     protected $fillable = [
-        'area_id', 'start_time', 'end_time', 'day'
+        'area_id', 'start_time', 'end_time', 'day', 'comment'
     ];
 
     protected $casts = [
