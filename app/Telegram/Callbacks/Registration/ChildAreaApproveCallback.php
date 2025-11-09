@@ -15,11 +15,13 @@ class ChildAreaApproveCallback extends Callback
         $user = $this->userService->findUserByChatId($this->chatId);
         $this->userService->setState($user, 'default');
 
-        ChildRegistered::dispatch($user->children()->first());
+//        ChildRegistered::dispatch($user->children()->first());
+
+        $childLink = $user->children()->first()->area->chat_link ?? '';
 
         $this->replyWithMessage([
-            'text' => "Данные успешно добавлены\\!\n\nПожалуйста, присоединитесь к родительскому чату по ссылке:\n\\<*ссылка на родительский чат*\\>",
-            'parse_mode' => 'MarkdownV2',
+            'text' => "Данные успешно добавлены!\n\nПожалуйста, присоединитесь к родительскому чату по ссылке:\n" . $childLink,
+            'parse_mode' => 'HTML',
         ]);
     }
 }

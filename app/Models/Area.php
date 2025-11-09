@@ -9,7 +9,7 @@ class Area extends Model
 {
     protected $table = 'areas';
     protected $fillable = [
-        'name', 'address'
+        'name', 'address', 'chat_link'
     ];
 
     public function children(): HasMany
