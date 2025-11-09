@@ -12,7 +12,7 @@ class User extends Model
 {
     protected $table = 'tg_users';
     protected $fillable = [
-        'username', 'chat_id'
+        'username', 'chat_id', 'accepted_pd'
     ];
 
     public function state(): HasOne
